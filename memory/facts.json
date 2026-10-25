@@ -123,5 +123,17 @@
     "updated_at": "2026-10-25T23:21:21+00:00",
     "superseded": false,
     "superseded_by": null
+  },
+  {
+    "id": "673df9fe",
+    "key": "has_no_secrets",
+    "value": "User states they have no secrets",
+    "tags": [
+      "identity"
+    ],
+    "created_at": "2026-10-25T23:50:38+00:00",
+    "updated_at": "2026-10-25T23:50:38+00:00",
+    "superseded": false,
+    "superseded_by": null
   }
 ]

@@ -312,7 +312,10 @@ def cmd_consolidate(args, cfg, mem_dir):
         print("nothing new to consolidate (journal is up to date)")
         return {"added": 0, "updated": 0, "removed": 0, "notes": 0, "up_to_date": True}
     max_batch = cfg.get("consolidation", {}).get("max_batch", 100)
-    batch = pending[:max_batch]
+    # pending is newest-first (iter_journal_newest_first). Reverse to oldest->newest
+    # so we catch up chronologically, the prompt stays "oldest first", and batch[-1]
+    # is the NEWEST processed entry -- the correct progress marker for the next run.
+    batch = pending[::-1][:max_batch]
 
     current = active_facts(load_facts(mem_dir))
     identity = (mem_dir / "identity.md").read_text(encoding="utf-8").strip() \
@@ -345,7 +348,7 @@ def cmd_consolidate(args, cfg, mem_dir):
         f"CURRENT IDENTITY:\n{identity or '(none yet)'}\n\n"
         f"CURRENT FACTS:\n{json.dumps(current, indent=2, ensure_ascii=False)}\n\n"
         f"NEW NOTES (oldest first):\n"
-        + "\n".join(f"- {e['ts']}: {e['text']}" for e in reversed(batch))
+        + "\n".join(f"- {e['ts']}: {e['text']}" for e in batch)
         + "\n\nReturn the JSON array."
     )
 
