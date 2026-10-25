@@ -30,6 +30,11 @@ python ui.py            # -> http://localhost:8765   (python ui.py 9000 for a cu
 
 Three panels:
 - **Chat** — memory-augmented chat; every exchange is logged to the journal.
+  Chat history is restored from the journal on reload. Check **auto-consolidate**
+  (chat panel header) to distill each turn into facts immediately; otherwise run
+  **Consolidate** manually whenever you like. Small models occasionally invent facts
+  during consolidation — the prompt now forbids it, but review new facts, and use the
+  × button to supersede anything wrong (it stays in facts.json for the audit trail).
 - **Memory** — edit the identity summary, add/update/supersede facts, browse the
   journal, and trigger **Consolidate** (LLM distillation) with one click.
 - **Debug** — LLM server reachability + model list, active config, and the last

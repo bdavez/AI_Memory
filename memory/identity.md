@@ -1,4 +1,5 @@
 - Name: Davis
 - Location: Toronto
-- Preference: Python over JavaScript for scripting tasks
+- Preferences: Python over JavaScript for scripting; favorite editor is Zed
 - Ongoing project: building a file-based memory system for local LLMs
+- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26

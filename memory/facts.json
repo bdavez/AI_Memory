@@ -46,5 +46,82 @@
     "updated_at": "2026-10-25T18:29:44+00:00",
     "superseded": false,
     "superseded_by": null
+  },
+  {
+    "id": "d161ec8a",
+    "key": "favorite_editor",
+    "value": "Favorite editor is Zed",
+    "tags": [
+      "preference"
+    ],
+    "created_at": "2026-10-25T18:58:27+00:00",
+    "updated_at": "2026-10-25T18:58:27+00:00",
+    "superseded": false,
+    "superseded_by": null
+  },
+  {
+    "id": "2360ad86",
+    "key": "food_preferences",
+    "value": "Likes pizza and dill pickle salad",
+    "tags": [
+      "preference"
+    ],
+    "created_at": "2026-10-25T18:58:27+00:00",
+    "updated_at": "2026-10-25T18:58:27+00:00",
+    "superseded": true,
+    "superseded_by": null,
+    "superseded_at": "2026-10-25T18:59:48+00:00"
+  },
+  {
+    "id": "d651f1ee",
+    "key": "favorite_foods",
+    "value": "Likes pizza and dill pickle salad",
+    "tags": [
+      "preference"
+    ],
+    "created_at": "2026-10-25T19:01:58+00:00",
+    "updated_at": "2026-10-25T19:01:58+00:00",
+    "superseded": true,
+    "superseded_by": null,
+    "superseded_at": "2026-10-25T19:30:00+00:00",
+    "note": "superseded by operator: hallucination - user never stated this (re-ingested from a model answer)"
+  },
+  {
+    "id": "1f0fcdbf",
+    "key": "event_ice_skating_after_basketball_2026_10_26",
+    "value": "Has ice skating after basketball on 2026-10-26",
+    "tags": [
+      "event",
+      "plan"
+    ],
+    "created_at": "2026-10-25T19:53:33+00:00",
+    "updated_at": "2026-10-25T19:53:33+00:00",
+    "superseded": false,
+    "superseded_by": null
+  },
+  {
+    "id": "1bec3c7f",
+    "key": "event_exam_in_2_days_2026_10_25",
+    "value": "Has an exam in 2 days (as of 2026-10-25)",
+    "tags": [
+      "event",
+      "plan"
+    ],
+    "created_at": "2026-10-25T20:49:59+00:00",
+    "updated_at": "2026-10-25T20:49:59+00:00",
+    "superseded": false,
+    "superseded_by": null
+  },
+  {
+    "id": "2511ac8e",
+    "key": "event_had_pizza_2026_10_25",
+    "value": "Had pizza on 2026-10-25",
+    "tags": [
+      "event"
+    ],
+    "created_at": "2026-10-25T23:21:21+00:00",
+    "updated_at": "2026-10-25T23:21:21+00:00",
+    "superseded": false,
+    "superseded_by": null
   }
 ]

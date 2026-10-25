@@ -89,7 +89,9 @@ def append_journal(mem_dir, text):
 def iter_journal_newest_first(mem_dir):
     files = sorted((mem_dir / "journal").glob("*.jsonl"), reverse=True)
     for f in files:
-        for line in f.read_text(encoding="utf-8").splitlines():
+        # Lines are appended oldest->newest within a file, so reverse them so
+        # the iterator truly yields newest-first (newest file comes first too).
+        for line in reversed(f.read_text(encoding="utf-8").splitlines()):
             line = line.strip()
             if not line:
                 continue
@@ -308,7 +310,7 @@ def cmd_consolidate(args, cfg, mem_dir):
     pending = [e for e in iter_journal_newest_first(mem_dir) if e["ts"] > last_ts]
     if not pending:
         print("nothing new to consolidate (journal is up to date)")
-        return
+        return {"added": 0, "updated": 0, "removed": 0, "notes": 0, "up_to_date": True}
     max_batch = cfg.get("consolidation", {}).get("max_batch", 100)
     batch = pending[:max_batch]
 
@@ -318,8 +320,19 @@ def cmd_consolidate(args, cfg, mem_dir):
 
     system = (
         "You are a memory-consolidation engine. Given new conversation notes, decide what "
-        "is DURABLE and worth remembering long-term. Ignore small talk, one-off tasks, "
-        "and anything easily re-derived. Respond with ONLY a JSON array of actions. "
+        "to remember long-term. Worth remembering: identity details, preferences, "
+        "relationships, projects, goals, and concrete plans or events (keep their dates). "
+        "STRICT RULES:\n"
+        "1. Use ONLY the user's own statements as evidence — journal lines that start "
+        "with 'Q:'. Lines starting with 'A:' are the assistant's replies and may be "
+        "wrong, guessed, or confabulated; NEVER extract facts from them.\n"
+        "2. Only extract facts EXPLICITLY STATED by the user — never infer, guess, or "
+        "invent anything the user did not say (e.g. about food, hobbies, or family).\n"
+        "3. Ignore pure small talk and pleasantries, but keep concrete facts, "
+        "preferences, and plans.\n"
+        "If there is nothing durable to remember, return an empty array (plus the "
+        "identity action only if it genuinely needs updating). "
+        "Respond with ONLY a JSON array of actions. "
         "Each action object has:\n"
         '  {"action":"add","key":"snake_case_key","value":"concise fact","tags":["optional"]}\n'
         '  {"action":"update","key":"existing_key","value":"new value"}   (when a fact changed)\n'
@@ -357,17 +370,21 @@ def cmd_consolidate(args, cfg, mem_dir):
             continue
         match = next((f for f in active_facts(facts) if f["key"] == key), None)
         if act == "add":
-            if match:
-                continue
-            facts.append({
-                "id": uuid.uuid4().hex[:8],
-                "key": key,
-                "value": a.get("value", ""),
-                "tags": a.get("tags") or [],
-                "created_at": now_iso(), "updated_at": now_iso(),
-                "superseded": False, "superseded_by": None,
-            })
-            added += 1
+            if match:  # key exists -> upsert so changed values are not silently dropped
+                match["value"] = a.get("value", match["value"])
+                match["tags"] = a.get("tags") or match.get("tags") or []
+                match["updated_at"] = now_iso()
+                updated += 1
+            else:
+                facts.append({
+                    "id": uuid.uuid4().hex[:8],
+                    "key": key,
+                    "value": a.get("value", ""),
+                    "tags": a.get("tags") or [],
+                    "created_at": now_iso(), "updated_at": now_iso(),
+                    "superseded": False, "superseded_by": None,
+                })
+                added += 1
         elif act == "update" and match:
             match["value"] = a.get("value", match["value"])
             match["updated_at"] = now_iso()
@@ -380,8 +397,11 @@ def cmd_consolidate(args, cfg, mem_dir):
     save_facts(mem_dir, facts)
     state["last_consolidated"] = batch[-1]["ts"]
     save_state(mem_dir, state)
+    summary = {"added": added, "updated": updated, "removed": removed,
+               "notes": len(batch)}
     print(f"done: +{added} added, {updated} updated, {removed} removed. "
           f"({len(batch)} notes processed)")
+    return summary
 
 
 def cmd_chat(args, cfg, mem_dir):
