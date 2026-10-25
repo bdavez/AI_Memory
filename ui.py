@@ -460,6 +460,7 @@ $("chatin").addEventListener("keydown", e => { if (e.key === "Enter") chat(); })
 $("autoc").addEventListener("change", () =>
   api("/api/settings", {auto_consolidate: $("autoc").checked}));
 
+ping();
 syncChat(true);
 // Live polling: pick up late LLM responses without a manual refresh.
 setInterval(() => { if (!chatting) syncChat(false); }, 5000);
@@ -576,7 +577,7 @@ HEADER = (
     "<!doctype html>\n<html><head><meta charset=\"utf-8\"><title>AI-MEM — __TITLE__</title>\n"
     "<style>" + CSS + "</style></head>\n<body>\n<header>\n"
     "  <h1>AI-MEM</h1>\n"
-    "  <span class=\"pill\" title=\"UI version — if this is not the latest after a hard refresh, your browser cached an old page\">ui v9</span>\n"
+    "  <span class=\"pill\" title=\"UI version — if this is not the latest after a hard refresh, your browser cached an old page\">ui v10</span>\n"
     "  <span class=\"dot\" id=\"dot\"></span><span class=\"pill\" id=\"pill\">checking server…</span>\n"
     "  <span class=\"pill\" id=\"model\"></span>\n"
     "  <span style=\"flex:1\"></span>\n"
