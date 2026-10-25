@@ -1,0 +1,50 @@
+[
+  {
+    "id": "554d4cc5",
+    "key": "name",
+    "value": "Davis",
+    "tags": [
+      "identity"
+    ],
+    "created_at": "2026-10-25T18:29:44+00:00",
+    "updated_at": "2026-10-25T18:29:44+00:00",
+    "superseded": false,
+    "superseded_by": null
+  },
+  {
+    "id": "4634ba02",
+    "key": "location",
+    "value": "Toronto",
+    "tags": [
+      "identity"
+    ],
+    "created_at": "2026-10-25T18:29:44+00:00",
+    "updated_at": "2026-10-25T18:29:44+00:00",
+    "superseded": false,
+    "superseded_by": null
+  },
+  {
+    "id": "5f255d91",
+    "key": "scripting_language_preference",
+    "value": "Prefers Python over JavaScript for scripting tasks",
+    "tags": [
+      "preference"
+    ],
+    "created_at": "2026-10-25T18:29:44+00:00",
+    "updated_at": "2026-10-25T18:29:44+00:00",
+    "superseded": false,
+    "superseded_by": null
+  },
+  {
+    "id": "c5b9ea8a",
+    "key": "project_file_based_memory_system",
+    "value": "Building a file-based memory system for local LLMs",
+    "tags": [
+      "project"
+    ],
+    "created_at": "2026-10-25T18:29:44+00:00",
+    "updated_at": "2026-10-25T18:29:44+00:00",
+    "superseded": false,
+    "superseded_by": null
+  }
+]

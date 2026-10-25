@@ -1,0 +1,22 @@
+[
+  {
+    "ts": "2026-10-25T18:39:28+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 4.81,
+    "request_chars": 1432,
+    "response_chars": 23,
+    "usage": {
+      "prompt_tokens": 513,
+      "completion_tokens": 35,
+      "total_tokens": 548,
+      "completion_tokens_details": {
+        "reasoning_tokens": 26
+      }
+    },
+    "system_excerpt": "You are a helpful assistant with long-term memory. The MEMORY block below was persisted from past sessions; use it naturally when relevant. If memory conflicts with what the user says now, the user's current statement wins.",
+    "user_excerpt": "=== MEMORY (as of 2026-10-25) ===\n[IDENTITY]\n- Name: Davis\n- Location: Toronto\n- Preference: Python over JavaScript for scripting tasks\n- Ongoing project: building a file-based memory system for local LLMs\n\n[FACTS]\n- name: Davis (identity)\n- location: Toronto (identity)\n- scripting_language_preference: Prefers Python over JavaScript for scripting tasks (preference)\n- project_file_based_memory_syst",
+    "response_excerpt": "Your name is **Davis**."
+  }
+]

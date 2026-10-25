@@ -1,0 +1,16 @@
+{
+  "llm": {
+    "base_url": "http://localhost:1235/v1",
+    "api_key": "",
+    "model": "qwen/qwen3.8-27b",
+    "notes": "Bionic local server on :1235. Other models: qwen3-coder-next-reap-48b-a3b, prism-ml/bonsai-27b"
+  },
+  "memory_dir": "memory",
+  "recall": {
+    "journal_entries": 10,
+    "max_facts": 100
+  },
+  "consolidation": {
+    "max_batch": 100
+  }
+}

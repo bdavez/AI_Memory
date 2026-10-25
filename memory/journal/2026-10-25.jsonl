@@ -1,0 +1,7 @@
+{"ts": "2026-10-25T18:29:17+00:00", "text": "My name is Davis and I live in Toronto"}
+{"ts": "2026-10-25T18:29:17+00:00", "text": "I prefer Python over JavaScript for scripting tasks"}
+{"ts": "2026-10-25T18:29:18+00:00", "text": "I am building a file-based memory system for local LLMs this weekend"}
+{"ts": "2026-10-25T18:30:07+00:00", "text": "Q: What do you know about me?"}
+{"ts": "2026-10-25T18:30:07+00:00", "text": "A: Based on what I have saved, I know:\n\n- Your name is **Davis**.\n- You live in **Toronto**.\n- You prefer **Python over JavaScript** for scripting tasks.\n- You’re working on a **file-based memory system for local LLMs**.\n\nIf any of that is outdated or you want me to remember something else, just tell me."}
+{"ts": "2026-10-25T18:39:28+00:00", "text": "Q: Quick check: what is my name?"}
+{"ts": "2026-10-25T18:39:28+00:00", "text": "A: Your name is **Davis**."}

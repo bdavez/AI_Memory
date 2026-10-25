@@ -1,0 +1,4 @@
+- Name: Davis
+- Location: Toronto
+- Preference: Python over JavaScript for scripting tasks
+- Ongoing project: building a file-based memory system for local LLMs
