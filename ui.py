@@ -173,6 +173,13 @@ class Handler(BaseHTTPRequestHandler):
                 return
             self._send(200, {"ok": True, "summary": summary or {}})
 
+        elif path == "/api/journal/clear":
+            summary, err = run_cmd(mem.cmd_clear_journal, [], cfg, mem_dir)
+            if err:
+                self._send(500, {"ok": False, "error": err})
+                return
+            self._send(200, {"ok": True, "summary": summary or {}})
+
         elif path == "/api/fact":
             key = (body.get("key") or "").strip()
             value = (body.get("value") or "").strip()
@@ -274,6 +281,15 @@ CSS = """
   .fact .del { background:none; border:none; color:var(--dim); padding:0 4px; font-size:15px; }
   .fact .del:hover { color:var(--err); }
   .sect { margin:14px 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--dim); }
+  .sect-toggle { display:flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+                 padding:3px 5px; border-radius:5px; }
+  .sect-toggle:hover { background:var(--panel2); }
+  .sect-toggle .caret { display:inline-block; font-size:11px; color:var(--dim); transition:transform .15s ease; }
+  .sect-toggle.open .caret { transform:rotate(90deg); }
+  .sect-toggle .tgl-btn { margin-left:auto; font-size:11px; padding:2px 9px; }
+  .sect-toggle .status { margin-left:4px; }
+  .collapsible { display:none; }
+  .collapsible.open { display:block; }
   .addfact { display:flex; flex-direction:column; gap:6px; margin-bottom:4px; }
   .addfact .row { display:flex; gap:6px; }
   .jentry { font-size:12.5px; padding:5px 8px; border-left:2px solid var(--border); margin-bottom:5px; }
@@ -340,6 +356,16 @@ function note(text, isErr, html) {
   const n = $("chatstatus");
   if (html) n.innerHTML = text; else n.textContent = text;
   n.classList.toggle("err", !!isErr);
+}
+
+async function clearChat() {
+  if (!confirm("Clear the chat? This deletes the whole conversation (it is stored in the journal). Facts and identity are kept.")) return;
+  try {
+    await api("/api/journal/clear", {});
+    note("chat cleared");
+    const s = await api("/api/state");
+    renderChat(s, true);
+  } catch (e) { note(String(e && e.message ? e.message : e), true); }
 }
 
 /* The journal is the single source of truth for the conversation. Every render
@@ -479,10 +505,43 @@ function renderFacts(facts) {
     </div>`).join("") : '<div class="status">no facts yet</div>';
 }
 
+// Render a stored UTC ISO timestamp (e.g. 2026-10-25T23:22:35+00:00) as a
+// friendly LOCAL time string using the browser's own time zone. Storage stays
+// UTC (robust for sorting/consolidation across DST); this is display-only.
+function fmtTs(ts) {
+  const d = new Date(ts);
+  if (isNaN(d.getTime())) return String(ts);
+  const date = d.toLocaleDateString([], {month: "short", day: "numeric", year: "numeric"});
+  const time = d.toLocaleTimeString([], {hour: "numeric", minute: "2-digit"});
+  return date + " \u00b7 " + time;
+}
+
 function renderJournal(j) {
   $("journal").innerHTML = j.length ? j.map(e =>
-    `<div class="jentry"><span class="ts">${esc(e.ts)}</span><br>${esc(e.text)}</div>`
+    `<div class="jentry"><span class="ts">${esc(fmtTs(e.ts))}</span><br>${esc(e.text)}</div>`
   ).join("") : '<div class="status">journal empty</div>';
+}
+
+function _journalPrefOpen() {
+  try { return localStorage.getItem("aimem_journal_open") === "1"; } catch (e) { return false; }
+}
+function toggleJournal() {
+  const tgl = $("journaltgl");
+  const wrap = $("journalwrap");
+  if (!tgl || !wrap) return;
+  const open = wrap.classList.toggle("open");
+  tgl.classList.toggle("open", open);
+  try { localStorage.setItem("aimem_journal_open", open ? "1" : "0"); } catch (e) {}
+}
+async function clearJournal(ev) {
+  if (ev && ev.stopPropagation) ev.stopPropagation();
+  if (!confirm("Clear the journal? This deletes every journal note (chat turns + remembered notes). Facts and identity are kept.")) return;
+  try {
+    await api("/api/journal/clear", {});
+    const st = $("journalstatus");
+    if (st) { st.textContent = "cleared ✓"; setTimeout(function(){ st.textContent = ""; }, 2000); }
+    refreshAll();
+  } catch (e) { alert(String(e && e.message ? e.message : e)); }
 }
 
 function renderDebug(d) {
@@ -568,6 +627,7 @@ async function consolidate() {
 $("autoc").addEventListener("change", () =>
   api("/api/settings", {auto_consolidate: $("autoc").checked}));
 
+if (_journalPrefOpen()) toggleJournal();   // restore last collapse state (default: hidden)
 ping(); refreshAll();
 // Live polling: new facts, journal entries, and LLM call log appear automatically.
 setInterval(() => { refreshAll(); }, 5000);
@@ -577,7 +637,7 @@ HEADER = (
     "<!doctype html>\n<html><head><meta charset=\"utf-8\"><title>AI-MEM — __TITLE__</title>\n"
     "<style>" + CSS + "</style></head>\n<body>\n<header>\n"
     "  <h1>AI-MEM</h1>\n"
-    "  <span class=\"pill\" title=\"UI version — if this is not the latest after a hard refresh, your browser cached an old page\">ui v10</span>\n"
+    "  <span class=\"pill\" title=\"UI version — if this is not the latest after a hard refresh, your browser cached an old page\">ui v13</span>\n"
     "  <span class=\"dot\" id=\"dot\"></span><span class=\"pill\" id=\"pill\">checking server…</span>\n"
     "  <span class=\"pill\" id=\"model\"></span>\n"
     "  <span style=\"flex:1\"></span>\n"
@@ -601,9 +661,12 @@ PAGE_CHAT = (
     + """<main class="chat">
   <section class="panel">
     <h2>Chat <span class="pill">memory-augmented · logged</span>
-      <label style="font-size:12px;color:var(--dim);display:flex;gap:5px;align-items:center;cursor:pointer;margin-left:auto">
-        <input type="checkbox" id="autoc" style="width:auto"> auto-consolidate
-      </label></h2>
+      <span style="display:flex;gap:10px;align-items:center;margin-left:auto">
+        <label style="font-size:12px;color:var(--dim);display:flex;gap:5px;align-items:center;cursor:pointer">
+          <input type="checkbox" id="autoc" style="width:auto"> auto-consolidate
+        </label>
+        <button class="danger" onclick="clearChat()">Clear chat</button>
+      </span></h2>
     <div class="body" id="msgs"></div>
     <div id="chatstatus"></div>
     <div id="chatbar">
@@ -650,8 +713,14 @@ PAGE_MEMORY = (
         </div>
       </div>
 
-      <div class="sect">Journal (newest first)</div>
-      <div id="journal"></div>
+      <div class="sect sect-toggle" id="journaltgl" onclick="toggleJournal()">
+        <span class="caret">▸</span><span>Journal (newest first)</span>
+        <button class="danger tgl-btn" onclick="clearJournal(event)">Clear journal</button>
+        <span class="status" id="journalstatus"></span>
+      </div>
+      <div class="collapsible" id="journalwrap">
+        <div id="journal"></div>
+      </div>
     </div>
   </section>
 

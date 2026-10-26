@@ -678,5 +678,165 @@
     "system_excerpt": "You are a memory-consolidation engine. Given new conversation notes, decide what to remember long-term. Worth remembering: identity details, preferences, relationships, projects, goals, and concrete plans or events (keep their dates). STRICT RULES:\n1. Use ONLY the user's own statements as evidence — journal lines that start with 'Q:'. Lines starting with 'A:' are the assistant's replies and may be",
     "user_excerpt": "CURRENT IDENTITY:\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\nCURRENT FACTS:\n[\n  {\n    \"id\": \"554d4cc5\",\n    \"key\": \"name\",\n    \"value\": \"Davis\",\n    \"tags\": [\n      \"identi",
     "response_excerpt": "[\n  {\n    \"action\": \"add\",\n    \"key\": \"has_no_secrets\",\n    \"value\": \"User states they have no secrets\",\n    \"tags\": [\n      \"identity\"\n    ]\n  }\n]"
+  },
+  {
+    "ts": "2026-10-26T00:02:40+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 20.39,
+    "request_chars": 2137,
+    "response_chars": 41,
+    "usage": {
+      "prompt_tokens": 905,
+      "completion_tokens": 484,
+      "total_tokens": 1389,
+      "completion_tokens_details": {
+        "reasoning_tokens": 465
+      }
+    },
+    "system_excerpt": "You are a helpful assistant with long-term memory. The MEMORY block below was persisted from past sessions; use it naturally when relevant. If memory conflicts with what the user says now, the user's current statement wins.",
+    "user_excerpt": "=== MEMORY (as of 2026-10-25) ===\n[IDENTITY]\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\n[FACTS]\n- name: Davis (identity)\n- location: Toronto (identity)\n- scripting_language",
+    "response_excerpt": "Tomorrow is **Monday, October 26, 2026**."
+  },
+  {
+    "ts": "2026-10-26T00:02:48+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 8.23,
+    "request_chars": 4607,
+    "response_chars": 2,
+    "usage": {
+      "prompt_tokens": 1920,
+      "completion_tokens": 123,
+      "total_tokens": 2043,
+      "completion_tokens_details": {
+        "reasoning_tokens": 119
+      }
+    },
+    "system_excerpt": "You are a memory-consolidation engine. Given new conversation notes, decide what to remember long-term. Worth remembering: identity details, preferences, relationships, projects, goals, and concrete plans or events (keep their dates). STRICT RULES:\n1. Use ONLY the user's own statements as evidence — journal lines that start with 'Q:'. Lines starting with 'A:' are the assistant's replies and may be",
+    "user_excerpt": "CURRENT IDENTITY:\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\nCURRENT FACTS:\n[\n  {\n    \"id\": \"554d4cc5\",\n    \"key\": \"name\",\n    \"value\": \"Davis\",\n    \"tags\": [\n      \"identi",
+    "response_excerpt": "[]"
+  },
+  {
+    "ts": "2026-10-26T00:51:52+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 54.76,
+    "request_chars": 2114,
+    "response_chars": 38,
+    "usage": {
+      "prompt_tokens": 907,
+      "completion_tokens": 1672,
+      "total_tokens": 2579,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1653
+      }
+    },
+    "system_excerpt": "You are a helpful assistant with long-term memory. The MEMORY block below was persisted from past sessions; use it naturally when relevant. If memory conflicts with what the user says now, the user's current statement wins.",
+    "user_excerpt": "=== MEMORY (as of 2026-10-25) ===\n[IDENTITY]\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\n[FACTS]\n- name: Davis (identity)\n- location: Toronto (identity)\n- scripting_language",
+    "response_excerpt": "Today is **Sunday, October 25, 2026**."
+  },
+  {
+    "ts": "2026-10-26T00:52:01+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 9.15,
+    "request_chars": 4605,
+    "response_chars": 2,
+    "usage": {
+      "prompt_tokens": 1921,
+      "completion_tokens": 135,
+      "total_tokens": 2056,
+      "completion_tokens_details": {
+        "reasoning_tokens": 131
+      }
+    },
+    "system_excerpt": "You are a memory-consolidation engine. Given new conversation notes, decide what to remember long-term. Worth remembering: identity details, preferences, relationships, projects, goals, and concrete plans or events (keep their dates). STRICT RULES:\n1. Use ONLY the user's own statements as evidence — journal lines that start with 'Q:'. Lines starting with 'A:' are the assistant's replies and may be",
+    "user_excerpt": "CURRENT IDENTITY:\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\nCURRENT FACTS:\n[\n  {\n    \"id\": \"554d4cc5\",\n    \"key\": \"name\",\n    \"value\": \"Davis\",\n    \"tags\": [\n      \"identi",
+    "response_excerpt": "[]"
+  },
+  {
+    "ts": "2026-10-26T00:53:25+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 38.4,
+    "request_chars": 1241,
+    "response_chars": 299,
+    "usage": {
+      "prompt_tokens": 440,
+      "completion_tokens": 1138,
+      "total_tokens": 1578,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1039
+      }
+    },
+    "system_excerpt": "You are a helpful assistant with long-term memory. The MEMORY block below was persisted from past sessions; use it naturally when relevant. If memory conflicts with what the user says now, the user's current statement wins.",
+    "user_excerpt": "=== MEMORY (as of 2026-10-25) ===\n[IDENTITY]\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\n[FACTS]\n- name: Davis (identity)\n- location: Toronto (identity)\n- scripting_language",
+    "response_excerpt": "Based on your saved memory as of **Oct 25, 2026**, your plans for the next 3 days are:\n\n- **Oct 25:** No future plans recorded; you had pizza.\n- **Oct 26:** Basketball, then ice skating.\n- **Oct 27:** Exam — it was noted as being in 2 days as of Oct 25.\n\nNo other plans are recorded for that period."
+  },
+  {
+    "ts": "2026-10-26T00:53:33+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 8.21,
+    "request_chars": 4883,
+    "response_chars": 2,
+    "usage": {
+      "prompt_tokens": 2007,
+      "completion_tokens": 130,
+      "total_tokens": 2137,
+      "completion_tokens_details": {
+        "reasoning_tokens": 126
+      }
+    },
+    "system_excerpt": "You are a memory-consolidation engine. Given new conversation notes, decide what to remember long-term. Worth remembering: identity details, preferences, relationships, projects, goals, and concrete plans or events (keep their dates). STRICT RULES:\n1. Use ONLY the user's own statements as evidence — journal lines that start with 'Q:'. Lines starting with 'A:' are the assistant's replies and may be",
+    "user_excerpt": "CURRENT IDENTITY:\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\nCURRENT FACTS:\n[\n  {\n    \"id\": \"554d4cc5\",\n    \"key\": \"name\",\n    \"value\": \"Davis\",\n    \"tags\": [\n      \"identi",
+    "response_excerpt": "[]"
+  },
+  {
+    "ts": "2026-10-26T00:57:34+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 7.14,
+    "request_chars": 1231,
+    "response_chars": 37,
+    "usage": {
+      "prompt_tokens": 436,
+      "completion_tokens": 81,
+      "total_tokens": 517,
+      "completion_tokens_details": {
+        "reasoning_tokens": 69
+      }
+    },
+    "system_excerpt": "You are a helpful assistant with long-term memory. The MEMORY block below was persisted from past sessions; use it naturally when relevant. If memory conflicts with what the user says now, the user's current statement wins.",
+    "user_excerpt": "=== MEMORY (as of 2026-10-25) ===\n[IDENTITY]\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\n[FACTS]\n- name: Davis (identity)\n- location: Toronto (identity)\n- scripting_language",
+    "response_excerpt": "No — Davis says they have no secrets."
+  },
+  {
+    "ts": "2026-10-26T00:57:49+00:00",
+    "status": "ok",
+    "url": "http://localhost:1235/v1/chat/completions",
+    "model": "qwen/qwen3.8-27b",
+    "elapsed_s": 14.88,
+    "request_chars": 4611,
+    "response_chars": 2,
+    "usage": {
+      "prompt_tokens": 1916,
+      "completion_tokens": 348,
+      "total_tokens": 2264,
+      "completion_tokens_details": {
+        "reasoning_tokens": 344
+      }
+    },
+    "system_excerpt": "You are a memory-consolidation engine. Given new conversation notes, decide what to remember long-term. Worth remembering: identity details, preferences, relationships, projects, goals, and concrete plans or events (keep their dates). STRICT RULES:\n1. Use ONLY the user's own statements as evidence — journal lines that start with 'Q:'. Lines starting with 'A:' are the assistant's replies and may be",
+    "user_excerpt": "CURRENT IDENTITY:\n- Name: Davis\n- Location: Toronto\n- Preferences: Python over JavaScript for scripting; favorite editor is Zed\n- Ongoing project: building a file-based memory system for local LLMs\n- Upcoming: exam in 2 days (as of 2026-10-25); ice skating after basketball on 2026-10-26\n\nCURRENT FACTS:\n[\n  {\n    \"id\": \"554d4cc5\",\n    \"key\": \"name\",\n    \"value\": \"Davis\",\n    \"tags\": [\n      \"identi",
+    "response_excerpt": "[]"
   }
 ]

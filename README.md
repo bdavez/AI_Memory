@@ -5,6 +5,10 @@ A persistent memory layer that works with any OpenAI-compatible local server
 model `qwen/qwen3.8-27b`). Everything is stored as **plain, human-readable
 files** — no database.
 
+![Alt text](./screenshot1.png "screenshot1")
+![Alt text](./screenshot2.png "screenshot2")
+![Alt text](./screenshot3.png "screenshot3")
+
 ## How it works
 
 ```

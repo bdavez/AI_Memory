@@ -424,6 +424,23 @@ def cmd_chat(args, cfg, mem_dir):
     append_journal(mem_dir, f"A: {answer}")
 
 
+def cmd_clear_journal(args, cfg, mem_dir):
+    """Delete every journal note (chat turns and any raw remembered notes).
+
+    Facts (facts.json) and identity.md are intentionally left untouched.
+    """
+    jdir = mem_dir / "journal"
+    removed = 0
+    if jdir.exists():
+        for f in sorted(jdir.glob("*.jsonl")):
+            for line in f.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    removed += 1
+            f.unlink()
+    print(f"cleared {removed} journal entries")
+    return {"cleared": removed}
+
+
 # ---------------------------------------------------------------- main
 
 COMMANDS = {
@@ -434,6 +451,7 @@ COMMANDS = {
     "forget": cmd_forget,
     "consolidate": cmd_consolidate,
     "chat": cmd_chat,
+    "clear-journal": cmd_clear_journal,
 }
 
 
